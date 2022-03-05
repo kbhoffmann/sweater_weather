@@ -30,5 +30,6 @@ RSpec.describe CityPhotoService do
     expect(search_results).to have_key(:user)
     expect(search_results[:user]).to be_a(Hash)
     expect(search_results[:user]).to have_key(:links)
+    expect(search_results[:user]).to have_key(:name)
   end
 end
