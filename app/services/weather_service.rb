@@ -3,7 +3,7 @@ class WeatherService
     Faraday.new(url: "https://api.openweathermap.org")
   end
 
-  def self.get_current_weather_data(latitude, longitude)
+  def self.get_weather_data(latitude, longitude)
     response = conn.get("/data/2.5/onecall?") do |request|
       request.params['lat'] = latitude
       request.params['lon'] = longitude

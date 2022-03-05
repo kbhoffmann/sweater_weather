@@ -9,8 +9,8 @@ RSpec.describe WeatherService do
     latitude = 	39.742043
     longitude = 	-104.991531
 
-    expect(WeatherService.get_current_weather_data(latitude, longitude)).to be_a(Hash)
-    weather_data = WeatherService.get_current_weather_data(latitude, longitude)
+    expect(WeatherService.get_weather_data(latitude, longitude)).to be_a(Hash)
+    weather_data = WeatherService.get_weather_data(latitude, longitude)
 
     expect(weather_data).to have_key(:current)
     expect(weather_data[:current]).to be_a(Hash)
