@@ -1,1 +1,44 @@
 require 'rails_helper'
+
+RSpec.describe WeatherService do
+  it 'gets weather data for an area by geocodes' do
+    latitude = 	39.742043
+    longitude = 	-104.991531
+
+    expect(WeatherService.get_current_weather_data(latitude, longitude)).to be_a(Hash)
+    current_weather = WeatherService.get_current_weather_data(latitude, longitude)
+
+    expect(WeatherService.get_current_weather_data(latitude, longitude)).to be_a(Hash)
+    weather_data = WeatherService.get_current_weather_data(latitude, longitude)
+
+    expect(weather_data).to have_key(:current)
+    expect(weather_data[:current]).to be_a(Hash)
+    expect(weather_data[:current]).to have_key(:dt)
+    expect(weather_data[:current][:dt]).to be_an(Integer)
+    expect(weather_data[:current]).to have_key(:sunrise)
+    expect(weather_data[:current][:sunrise]).to be_an(Integer)
+    expect(weather_data[:current]).to have_key(:sunset)
+    expect(weather_data[:current][:sunset]).to be_an(Integer)
+
+    expect(weather_data[:current]).to have_key(:temp)
+    expect(weather_data[:current][:temp]).to be_a(Float)
+    expect(weather_data[:current]).to have_key(:feels_like)
+    expect(weather_data[:current][:feels_like]).to be_a(Float)
+    expect(weather_data[:current]).to have_key(:humidity)
+    expect(weather_data[:current][:humidity]).to be_an(Integer)
+
+    expect(weather_data[:current]).to have_key(:uvi)
+    expect(weather_data[:current][:uvi]).to be_a(Float)
+
+    expect(weather_data[:current]).to have_key(:visibility)
+    expect(weather_data[:current][:visibility]).to be_an(Integer)
+
+    expect(weather_data[:current]).to have_key(:weather)
+    expect(weather_data[:current][:weather]).to be_an(Array)
+    expect(weather_data[:current][:weather].first).to be_a(Hash)
+    expect(weather_data[:current][:weather].first).to have_key(:description)
+    expect(weather_data[:current][:weather].first[:description]).to be_a(String)
+    expect(weather_data[:current][:weather].first).to have_key(:icon)
+    expect(weather_data[:current][:weather].first[:icon]).to be_a(String)
+  end
+end
