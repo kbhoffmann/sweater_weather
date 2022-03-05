@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe MapService do
   it 'gets the latitude and longitude for a city' do
+    json_response = File.read('spec/fixtures/map_geocoding_data.json')
+    stub_request(:get, "http://www.mapquestapi.com/geocoding/v1/address?key=UHerve0fkvZVNWgBwQzNhk9nhiz3gtWX&location=Denver,CO").
+    to_return(status: 200, body: json_response, headers: {})
+
     location = "Denver,CO"
 
     expect(MapService.get_lat_long(location)).to be_a(Hash)
