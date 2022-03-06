@@ -9,5 +9,12 @@ RSpec.describe MapFacade do
     location = "denver,co"
 
     expect(MapFacade.get_lat_long(location)).to be_a(Geocoordinate)
+    expect(MapFacade.get_lat_long(location)).to be_a(Geocoordinate)
+    expect(MapFacade.get_lat_long(location)).to be_a(Geocoordinate)
+    location_coords = MapFacade.get_lat_long(location)
+    expect(location_coords.latitude).to be_a(Float)
+    expect(location_coords.latitude).to eq(39.738453)
+    expect(location_coords.longitude).to be_a(Float)
+    expect(location_coords.longitude).to eq(-104.984853)
   end
 end
