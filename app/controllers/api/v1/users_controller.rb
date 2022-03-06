@@ -1,8 +1,12 @@
 class Api::V1::UsersController < ApplicationController
   def create
-    email = params[:email]
-    password = params[:password]
-    password_confirmation = params[:password_confirmation]
-    binding.pry
+    user = User.new(user_params)
+    user.save
+  end
+
+  private
+
+  def user_params
+    params.permit(:email, :password, :password_confirmation)
   end
 end
