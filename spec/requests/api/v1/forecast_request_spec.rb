@@ -34,9 +34,9 @@ RSpec.describe "Forcast by city API endpoint" do
     expect(parsed_weather_data[:data][:attributes][:current_weather]).to have_key(:uvi)
     expect(parsed_weather_data[:data][:attributes][:current_weather]).to have_key(:visibility)
     expect(parsed_weather_data[:data][:attributes][:current_weather]).to have_key(:conditions)
-    expect(parsed_weather_data[:data][:attributes][:current_weather][:conditions).be_a(String)
+    expect(parsed_weather_data[:data][:attributes][:current_weather][:conditions]).be_a(String)
     expect(parsed_weather_data[:data][:attributes][:current_weather]).to have_key(:icon)
-    expect(parsed_weather_data[:data][:attributes][:current_weather][:icon).be_a(String)
+    expect(parsed_weather_data[:data][:attributes][:current_weather][:icon]).be_a(String)
 
     expect(parsed_weather_data[:data][:attributes]).to have_key(:daily_weather)
     expect(parsed_weather_data[:data][:attributes][:daily_weather].length).to eq(7)
