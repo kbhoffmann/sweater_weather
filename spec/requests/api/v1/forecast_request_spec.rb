@@ -22,8 +22,11 @@ RSpec.describe "Forcast by city API endpoint" do
     expect(parsed_weather_data[:data]).to have_key(:type)
     expect(parsed_weather_data[:data][:type]).to eq("forecast")
     expect(parsed_weather_data[:data]).to have_key(:attributes)
+    expect(parsed_weather_data[:data][:attributes]).to be_a(Hash)
     expect(parsed_weather_data[:data][:attributes].length).to eq(3)
+
     expect(parsed_weather_data[:data][:attributes]).to have_key(:current_weather)
+    expect(parsed_weather_data[:data][:attributes][:current_weather]).to be_a(Hash)
     expect(parsed_weather_data[:data][:attributes][:current_weather].length).to eq(10)
     expect(parsed_weather_data[:data][:attributes][:current_weather]).to have_key(:datetime)
     expect(parsed_weather_data[:data][:attributes][:current_weather][:datetime]).be_a(String)
@@ -46,6 +49,7 @@ RSpec.describe "Forcast by city API endpoint" do
     expect(parsed_weather_data[:data][:attributes][:current_weather][:icon]).be_a(String)
 
     expect(parsed_weather_data[:data][:attributes]).to have_key(:daily_weather)
+    expect(parsed_weather_data[:data][:attributes][:daily_weather]).to be_a(Hash)
     expect(parsed_weather_data[:data][:attributes][:daily_weather].length).to eq(7)
     expect(parsed_weather_data[:data][:attributes][:daily_weather]).to have_key(:date)
     expect(parsed_weather_data[:data][:attributes][:daily_weather]).to_not have_key(:datetime)
@@ -63,6 +67,7 @@ RSpec.describe "Forcast by city API endpoint" do
     expect(parsed_weather_data[:data][:attributes][:daily_weather]).to_not have_key(:visibility)
 
     expect(parsed_weather_data[:data][:attributes]).to have_key(:hourly_weather)
+    expect(parsed_weather_data[:data][:attributes][:hourly_weather]).to be_a(Hash)
     expect(parsed_weather_data[:data][:attributes][:hourly_weather].length).to eq(4)
     expect(parsed_weather_data[:data][:attributes][:hourly_weather]).to have_key(:time)
     expect(parsed_weather_data[:data][:attributes][:hourly_weather][:time]).be_a(String)
