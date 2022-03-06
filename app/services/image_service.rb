@@ -1,4 +1,4 @@
-class CityPhotoService
+class ImageService
   def self.conn
     Faraday.new(url: "https://api.unsplash.com")
   end
