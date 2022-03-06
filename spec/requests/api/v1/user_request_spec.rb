@@ -33,6 +33,6 @@ RSpec.describe "Requests for User" do
     expect(parsed_user_response[:data][:attributes]).to have_key(:email)
     expect(parsed_user_response[:data][:attributes][:email]).to be_a(String)
     expect(parsed_user_response[:data][:attributes]).to have_key(:api_key)
-    expect(parsed_user_response[:data][:attributes][:api_key).to be_a(String)
+    expect(parsed_user_response[:data][:attributes][:api_key]).to be_a(String)
   end
 end
