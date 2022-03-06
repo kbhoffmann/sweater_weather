@@ -9,5 +9,10 @@ RSpec.describe ImagesFacade do
     query = "denver,co"
 
     expect(ImagesFacade.get_image_by_query(query)).to be_an(Image)
+    image = ImagesFacade.get_image_by_query(query)
+    expect(image.image_url).to be_a(String)
+    expect(image.location).to eq("denver,co")
+    expect(image.author).to be_a(String)
+    expect(image.hotlink).to be_a(String)
   end
 end
