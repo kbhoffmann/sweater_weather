@@ -1,10 +1,9 @@
 class Api::V1::ForecastController < ApplicationController
   def show
     coords = MapFacade.get_lat_long(params[:location])
-    lat = coords.latitude     #=> 39.738453
-    lon = coords.longitude     #=> -104.984853
-    current_weather = WeatherFacade.current_weather(lat,lon)
-    daily_weather = WeatherFacade.five_day_weather(lat,lon)
-    hourly_weather = WeatherFacade.next_eight_hours(lat,lon)
+    current = WeatherFacade.current_weather(coords.latitude, coords.longitude)
+    five_day = WeatherFacade.five_day_weather(coords.latitude, coords.longitude)
+    eight_hour = WeatherFacade.next_eight_hours(coords.latitude, coords.longitude)
+    render json: ForecastSerializer.weather_json(current, five_day, eight_hour)
   end
 end
