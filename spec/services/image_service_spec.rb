@@ -3,16 +3,15 @@ require 'rails_helper'
 RSpec.describe ImageService do
   it 'gets photos of a city by city name' do
     json_response = File.read('spec/fixtures/city_photo_data.json')
-    # stub_request(:get, "https://api.unsplash.com/search/photos?client_id=LahT-YFX4dt-VSuL19jrkdwH9rvkJTgE7RAXbkBeCS0&query=Denver,%20CO").
+    stub_request(:get, "https://api.unsplash.com/search/photos?client_id=LahT-YFX4dt-VSuL19jrkdwH9rvkJTgE7RAXbkBeCS0&query=denver,co").
     to_return(status: 200, body: json_response, headers: {})
-
 
     city = "denver,co"
 
-    expect(ImageService.get_city_photo(city)).to be_a(Hash)
-    expect(ImageService.get_city_photo(city)).to have_key(:results)
-    expect(ImageService.get_city_photo(city)[:results]).to be_an(Array)
-    search_results = ImageService.get_city_photo(city)[:results][0]
+    expect(ImageService.get_photo(city)).to be_a(Hash)
+    expect(ImageService.get_photo(city)).to have_key(:results)
+    expect(ImageService.get_photo(city)[:results]).to be_an(Array)
+    search_results = ImageService.get_photo(city)[:results][0]
     expect(search_results).to have_key(:description)
     expect(search_results[:description]).to be_a(String)
     expect(search_results).to have_key(:alt_description)
