@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe WeatherService do
   it 'gets weather data for an area by geocodes' do
-    json_response = File.read('spec/fixtures/weather_data.json')
-    stub_request(:get, "https://api.openweathermap.org/data/2.5/onecall?appid=b223e219a2cff0890dbe4fae9e6d5836&exclude=minutely,alerts&lat=39.742043&lon=-104.991531&units=imperial").
+    json_response = File.read('spec/fixtures/request_weather_data.json')
+    stub_request(:get, "https://api.openweathermap.org/data/2.5/onecall?appid=b223e219a2cff0890dbe4fae9e6d5836&exclude=minutely,alerts&lat=39.738453&lon=-104.984853&units=imperial").
     to_return(status: 200, body: json_response, headers: {})
 
-    latitude = 	39.742043
-    longitude = 	-104.991531
+    latitude = 39.738453
+    longitude = -104.984853
 
     expect(WeatherService.get_weather_data(latitude, longitude)).to be_a(Hash)
     weather_data = WeatherService.get_weather_data(latitude, longitude)
