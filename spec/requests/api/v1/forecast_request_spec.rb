@@ -26,5 +26,20 @@ RSpec.describe "Forcast by city API endpoint" do
     expect(parsed_request[:data][:attributes][:current_weather]).to have_key(:visibility)
     expect(parsed_request[:data][:attributes][:current_weather]).to have_key(:conditions)
     expect(parsed_request[:data][:attributes][:current_weather]).to have_key(:icon)
+
+    expect(parsed_request[:data][:attributes]).to have_key(:daily_weather)
+    expect(parsed_request[:data][:attributes][:daily_weather]).to have_key(:date)
+    expect(parsed_request[:data][:attributes][:daily_weather]).to have_key(:sunrise)
+    expect(parsed_request[:data][:attributes][:daily_weather]).to have_key(:sunset)
+    expect(parsed_request[:data][:attributes][:daily_weather]).to have_key(:max_temp)
+    expect(parsed_request[:data][:attributes][:daily_weather]).to have_key(:min_temp)
+    expect(parsed_request[:data][:attributes][:daily_weather]).to have_key(:conditions)
+    expect(parsed_request[:data][:attributes][:daily_weather]).to have_key(:icon)
+
+    expect(parsed_request[:data][:attributes]).to have_key(:hourly_weather)
+    expect(parsed_request[:data][:attributes][:hourly_weather]).to have_key(:time)
+    expect(parsed_request[:data][:attributes][:hourly_weather]).to have_key(:temperature)
+    expect(parsed_request[:data][:attributes][:hourly_weather]).to have_key(:conditions)
+    expect(parsed_request[:data][:attributes][:hourly_weather]).to have_key(:icon)
   end
 end
