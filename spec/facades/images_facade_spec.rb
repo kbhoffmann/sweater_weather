@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ImagesFacade do
-  xit 'sends image data to the Image poro' do
+  it 'sends image data to the Image poro' do
     json_response = File.read('spec/fixtures/city_photo_data.json')
     stub_request(:get, "https://api.unsplash.com/search/photos?client_id=LahT-YFX4dt-VSuL19jrkdwH9rvkJTgE7RAXbkBeCS0&query=denver,co").
     to_return(status: 200, body: json_response, headers: {})
