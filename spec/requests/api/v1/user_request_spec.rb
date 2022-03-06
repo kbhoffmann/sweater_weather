@@ -37,4 +37,10 @@ RSpec.describe "Requests for User" do
     expect(parsed_user_response[:data]).to_not have_key(:password)
     expect(parsed_user_response[:data]).to_not have_key(:password_confirmation)
   end
+
+  xit 'returns an error if password and password confirmation not matching' do
+  end
+
+  xit 'returns an error if email is not unique' do
+  end
 end
