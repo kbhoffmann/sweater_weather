@@ -2,6 +2,13 @@ require 'rails_helper'
 
 RSpec.describe "Forcast by city API endpoint" do
   it 'returns a json response of current,daily, and hourly weather data for a city' do
+    coord_response = File.read('spec/fixtures/map_geocoding_data.json')
+    stub_request(:get, "http://www.mapquestapi.com/geocoding/v1/address?key=UHerve0fkvZVNWgBwQzNhk9nhiz3gtWX&location=denver,co").
+    to_return(status: 200, body: coord_response, headers: {})
+
+    weather_response = File.read('spec/fixtures/request_weather_data.json')
+    stub_request(:get, "https://api.openweathermap.org/data/2.5/onecall?appid=b223e219a2cff0890dbe4fae9e6d5836&exclude=minutely,alerts&lat=39.738453&lon=-104.984853&units=imperial").
+    to_return(status: 200, body: weather_response, headers: {})
 
     location = "denver,co"
 
