@@ -16,7 +16,12 @@ RSpec.describe "Forcast by city API endpoint" do
     parsed_weather_data = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_successful
+
+    expect(parsed_weather_data).to be_a(Hash)
     expect(parsed_weather_data.length).to eq(1)
+    expect(parsed_weather_data).to have_key(:data)
+    expect(parsed_weather_data[:data]).to be_a(Hash)
+    expect(parsed_weather_data[:data].length).to be_eq(5)
     expect(parsed_weather_data[:data]).to have_key(:id)
     expect(parsed_weather_data[:data][:id]).to eq(nil)
     expect(parsed_weather_data[:data]).to have_key(:type)
