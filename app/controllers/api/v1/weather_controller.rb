@@ -1,4 +1,4 @@
-class Api::V1::ForecastController < ApplicationController
+class Api::V1::WeatherController < ApplicationController
   def show
     coords = MapFacade.get_lat_long(params[:location])
     current = WeatherFacade.current_weather(coords.latitude, coords.longitude)
