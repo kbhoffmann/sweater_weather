@@ -3,5 +3,12 @@ class User < ApplicationRecord
   validates_presence_of :password, require: true
 
   has_secure_password
-  has_secure_token :api_key
+
+  def api_key
+   loop do
+     key = SecureRandom.hex
+     return key unless User.where(api_key: key).exists?
+   end
+  end
+
 end
