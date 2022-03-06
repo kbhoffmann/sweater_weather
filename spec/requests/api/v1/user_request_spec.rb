@@ -10,7 +10,7 @@ RSpec.describe "Requests for User" do
     }
     # headers = { "CONTENT_TYPE" => "application/json" }
 
-    post "/api/v1/users/", params: user
+    post "/api/v1/users", params: user, as: :json
 
     expect(User.last[:email]).to eq("whatever@example.com")
 
@@ -34,5 +34,7 @@ RSpec.describe "Requests for User" do
     expect(parsed_user_response[:data][:attributes][:email]).to be_a(String)
     expect(parsed_user_response[:data][:attributes]).to have_key(:api_key)
     expect(parsed_user_response[:data][:attributes][:api_key]).to be_a(String)
+    expect(parsed_user_response[:data]).to_not have_key(:password)
+    expect(parsed_user_response[:data]).to_not have_key(:password_confirmation)
   end
 end
