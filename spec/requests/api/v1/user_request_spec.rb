@@ -14,8 +14,25 @@ RSpec.describe "Requests for User" do
 
     expect(User.last[:email]).to eq("whatever@example.com")
 
-    # json_response = JSON.parse(response.body, symbolize_names: true)
-    #
-    # expect(response).to be_successful
+    parsed_user_response = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to be_successful
+    expect(response.status).to eq(201)
+
+    expect(parsed_user_response).to be_a(Hash)
+    expect(parsed_user_response.length).to eq(1)
+    expect(parsed_user_response).to have_key(:data)
+    expect(parsed_user_response[:data]).to be_a(Hash)
+    expect(parsed_user_response[:data].length).to eq(3)
+    expect(parsed_user_response[:data]).to have_key(:type)
+    expect(parsed_user_response[:data][:type]).to eq("users")
+    expect(parsed_user_response[:data]).to have_key(:id)
+    expect(parsed_user_response[:data][:id]).to eq(1)
+    expect(parsed_user_response[:data]).to have_key(:attributes)
+    expect(parsed_user_response[:data][:attributes]).to be_a(Hash)
+    expect(parsed_user_response[:data][:attributes]).to have_key(:email)
+    expect(parsed_user_response[:data][:attributes][:email]).to be_a(String)
+    expect(parsed_user_response[:data][:attributes]).to have_key(:api_key)
+    expect(parsed_user_response[:data][:attributes][:api_key).to be_a(String)
   end
 end
