@@ -3,7 +3,7 @@ class ForecastSerializer
   def self.weather_json(current, five_day, eight_hour)
       {
       "data": {
-        "id": null,
+        "id": nil,
         "type": "forecast",
         "attributes": {
           "current_weather": {
@@ -14,31 +14,33 @@ class ForecastSerializer
             "feels_like": current.feels_like,
             "humidity": current.humidity,
             "uvi": current.uvi,
-            "visibility": current.visitibility,
+            "visibility": current.visibility,
             "conditions": current.conditions,
             "icon": current.icon
           },
 
-          "daily_weather": [
+        "daily_weather":
+          five_day.map do |day|
             {
-              "date": five_day.date,
-              "sunrise": five_day.sunrise,
-              "sunset": five_day.sunset,
-              "max_temp": five_day.max_temp,
-              "min_temp": five_day.min_temp,
-              "conditions": five_day.conditions,
-              "icon": five_day.icon
+              "date": day.date,
+              "sunrise": day.sunrise,
+              "sunset": day.sunset,
+              "max_temp": day.max_temp,
+              "min_temp": day.min_temp,
+              "conditions": day.conditions,
+              "icon": day.icon
             }
-          ],
+          end,
 
-          "hourly_weather": [
-            {
-              "time": eight_hour.time,
-              "temperature": eight_hour.temperature,
-              "conditions": eight_hour.conditions,
-              "icon": eight.icon
-            }
-          ]
+          "hourly_weather":
+            eight_hour.map do |hour|
+             {
+              "time": hour.time,
+              "temperature": hour.temperature,
+              "conditions": hour.conditions,
+              "icon": hour.icon
+             }
+           end
         }
       }
     }
