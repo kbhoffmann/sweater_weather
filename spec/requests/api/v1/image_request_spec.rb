@@ -17,7 +17,7 @@ RSpec.describe "Background Image by city API endpoint" do
 
     expect(parsed_image_data).to be_a(Hash)
     expect(parsed_image_data.length).to eq(1)
-    expect(parsed_image_data).to_have_key(:data)
+    expect(parsed_image_data).to have_key(:data)
     expect(parsed_image_data[:data]).to be_a(Hash)
     expect(parsed_image_data[:data].length).to eq(3)
     expect(parsed_image_data[:data]).to have_key(:type)
@@ -34,11 +34,9 @@ RSpec.describe "Background Image by city API endpoint" do
     expect(parsed_image_data[:data][:attributes][:image][:image_url]).to be_a(String)
     expect(parsed_image_data[:data][:attributes][:image]).to have_key(:credit)
     expect(parsed_image_data[:data][:attributes][:image][:credit]).to be_a(Hash)
-    expect(parsed_image_data[:data][:attributes][:image][:credit]).to have_key(:source)
-    expect(parsed_image_data[:data][:attributes][:image][:credit][:source]).to be_a(String)
+    expect(parsed_image_data[:data][:attributes][:image][:credit]).to have_key(:hotlink)
+    expect(parsed_image_data[:data][:attributes][:image][:credit][:hotlink]).to be_a(String)
     expect(parsed_image_data[:data][:attributes][:image][:credit]).to have_key(:author)
     expect(parsed_image_data[:data][:attributes][:image][:credit][:author]).to be_a(String)
-    expect(parsed_image_data[:data][:attributes][:image][:credit]).to have_key(:logo)
-    expect(parsed_image_data[:data][:attributes][:image][:credit][:logo]).to be_a(String)
   end
 end
