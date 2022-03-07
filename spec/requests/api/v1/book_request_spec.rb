@@ -36,6 +36,9 @@ RSpec.describe "Book by city API endpoint" do
     expect(attributes[:total_books_found]).to be_an(Integer)
     expect(attributes).to have_key(:books)
     expect(attributes[:books]).to be_an(Array)
+    expect(attributes).to_not have_key(:title)
+    expect(attributes).to_not have_key(:publisher)
+    expect(attributes).to_not have_key(:isbn)
 
     books = attributes[:books]
     expect(books).to be_an(Array)
@@ -50,6 +53,11 @@ RSpec.describe "Book by city API endpoint" do
       expect(book).to have_key(:publisher)
       expect(book[:publisher]).to be_an(Array)
       expect(book[:publisher][0]).to be_a(String)
+      expect(book).to_not have_key(:forecast)
+      expect(book).to_not have_key(:total_books_found)
+      expect(book).to_not have_key(:destination)
+      expect(book).to_not have_key(:summary)
+      expect(book).to_not have_key(:temperature)
     end
   end
 end
