@@ -8,7 +8,6 @@ RSpec.describe "Requests for User" do
       "password": "password123",
       "password_confirmation": "password123"
     }
-    # headers = { "CONTENT_TYPE" => "application/json" }
 
     post "/api/v1/users", params: user, as: :json
 
