@@ -22,7 +22,6 @@ class Api::V1::BooksController < ApplicationController
     five_book_objects = five_books_data.map do |book|
                   Book.new(book)
                 end
-    end
-
     render json: BookSerializer.book_json(destination, forecast, total_books_found, five_book_objects)
+  end
 end
