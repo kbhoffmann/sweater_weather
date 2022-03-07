@@ -25,9 +25,17 @@ RSpec.describe "Book by city API endpoint" do
 
     attributes = parsed_book_data[:data][:attributes]
     expect(attributes).to have_key(:destination)
+    expect(attributes[:destination]).to be_a(String)
     expect(attributes).to have_key(:forecast)
+    expect(attributes[:forecast]).to be_a(Hash)
+    expect(attributes[:forecast]).to have_key(:summary)
+    expect(attributes[:forecast][:summary]).to be_a(String)
+    expect(attributes[:forecast]).to have_key(:temperature)
+    expect(attributes[:forecast][:temperature]).to be_a(String)
     expect(attributes).to have_key(:total_books_found)
+    expect(attributes[:total_books_found]).to be_an(Integer)
     expect(attributes).to have_key(:books)
+    expect(attributes[:books]).to be_an(Array)
 
     books = attributes[:books]
     expect(books).to be_an(Array)
