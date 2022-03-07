@@ -22,8 +22,8 @@ RSpec.describe 'User Roadtrip' do
 
     trip_params =
         {
-          "origin": "Denver,CO",
-          "destination": "Milwaukee,WI",
+          "origin": "Denver, CO",
+          "destination": "Milwaukee, WI",
           "api_key": "#{user.api_key}"
         }
 

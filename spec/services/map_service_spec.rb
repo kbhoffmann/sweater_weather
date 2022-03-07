@@ -22,4 +22,17 @@ RSpec.describe MapService do
     expect(results_data[:locations][0][:latLng]).to have_key(:lng)
     expect(results_data[:locations][0][:latLng][:lng]).to be_a(Float)
   end
+
+  it 'gets the route between two cities' do
+
+    # json_response = File.read('spec/fixtures/trip_route_data.json')
+    # stub_request(:get, "http://www.mapquestapi.com/directions/v2/route?from=Denver,%20CO&key=UHerve0fkvZVNWgBwQzNhk9nhiz3gtWX&to=Milwaukee,%20WI").
+    # to_return(status: 200, body: json_response, headers: {})
+
+    origin = "Denver, CO"
+    destination = "Milwaukee, WI"
+
+    expect(MapService.get_trip_route(origin, destination)).to be_a(Hash)
+
+  end
 end
