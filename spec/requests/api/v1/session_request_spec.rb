@@ -38,6 +38,55 @@ RSpec.describe "User Session/Login Request" do
     expect(parsed_session_response[:data]).to_not have_key(:password_confirmation)
   end
 
-  xit 'returns and error and a 400 status code if unsuccessful' do
+  it 'returns and error and a 401 status code if wrong password is entered' do
+    user =
+    {
+      "email": "whatever@example.com",
+      "password": "password123",
+      "password_confirmation": "password123"
+    }
+
+    post "/api/v1/users", params: user, as: :json
+
+    login =
+    {
+      "email": "whatever@example.com",
+      "password": "wrong password entered",
+    }
+
+    post "/api/v1/sessions", params: login, as: :json
+
+    parsed_response = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to_not be_successful
+
+    expect(response.status).to eq(401)
+    expect(parsed_response[:errors]).to eq("Bad Credentials")
+  end
+
+  it 'returns and error and a 401 status code if user email not found' do
+    user =
+    {
+      "email": "whatever@example.com",
+      "password": "password123",
+      "password_confirmation": "password123"
+    }
+
+    post "/api/v1/users", params: user, as: :json
+
+    login =
+    {
+      "email": "non-existent-user@example.com",
+      "password": "password123",
+    }
+
+    post "/api/v1/sessions", params: login, as: :json
+
+    parsed_response = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to_not be_successful
+
+    expect(response.status).to eq(401)
+    expect(parsed_response[:errors]).to eq("Bad Credentials")
   end
 end
