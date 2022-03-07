@@ -4,11 +4,14 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  def api_key
+  before_create :create_api_key
+
+  private
+
+  def create_api_key
    loop do
-     key = SecureRandom.hex
-     return key unless User.where(api_key: key).exists?
+     self.api_key = SecureRandom.hex
+     return api_key unless User.where(api_key: api_key).exists?
    end
   end
-
 end
