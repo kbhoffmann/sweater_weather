@@ -11,7 +11,14 @@ class BookSerializer
             "temperature": forecast.temperature
           },
           "total_books_found": total_books_found,
-          "books": 
+          "books":
+          five_book_objects.map do |book|
+            {
+              "isbn": book.isbn,
+              "title": book.title,
+              "publisher": book.publisher
+            }
+          end 
         }
       }
     }
