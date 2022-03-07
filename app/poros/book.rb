@@ -1,2 +1,5 @@
 class Book
-end 
+  def initialize(book_data)
+
+  end
+end

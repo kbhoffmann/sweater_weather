@@ -17,9 +17,11 @@ class Api::V1::BooksController < ApplicationController
     summary = current_weather.conditions
     temperature = current_weather.temperature
     total_books_found = book_data[:numFound]
-    books = five_books[3]
-    binding.pry
-    #need to limit
+    five_books = book_data[:docs].first(quantity.to_i)
+    five_books.map do |book|
+      binding.pry
+      Book.new(book)
+    end
     # Book.new(book_data)
   end
 end
