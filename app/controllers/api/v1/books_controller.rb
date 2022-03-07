@@ -10,9 +10,16 @@ class Api::V1::BooksController < ApplicationController
     end
 
     book_data = JSON.parse(book_api_response.body, symbolize_names: true)
+
+    coords = MapFacade.get_lat_long(params[:location])
+    current_weather = WeatherFacade.current_weather(coords.latitude, coords.longitude)
+    destination = params[:location]
+    summary = current_weather.conditions
+    temperature = current_weather.temperature
+    total_books_found = book_data[:numFound]
+    books = five_books[3]
     binding.pry
     #need to limit
-    Book.new(book_data)
-
+    # Book.new(book_data)
   end
 end
