@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      get '/book-search', to: 'books#index'
+
       get '/forecast', to: 'weather#show'
 
       get '/backgrounds', to: 'images#show'
