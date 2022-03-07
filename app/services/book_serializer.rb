@@ -8,7 +8,7 @@ class BookSerializer
           "destination": destination,
           "forecast": {
             "summary": forecast.conditions,
-            "temperature": forecast.temperature
+            "temperature": forecast.temperature.round.to_s.concat(" F")
           },
           "total_books_found": total_books_found,
           "books":
@@ -18,7 +18,7 @@ class BookSerializer
               "title": book.title,
               "publisher": book.publisher
             }
-          end 
+          end
         }
       }
     }
