@@ -46,27 +46,41 @@ RSpec.describe "Requests for User" do
       "password": "password123",
       "password_confirmation": "password456"
     }
-    # headers = { "CONTENT_TYPE" => "application/json" }
 
     post "/api/v1/users", params: user, as: :json
 
     parsed_response = JSON.parse(response.body, symbolize_names: true)
 
+    expect(response).to_not be_successful
+
     expect(response.status).to eq(400)
     expect(parsed_response[:errors][0]).to eq("Password confirmation doesn't match Password")
   end
 
-  xit 'returns an error if email is not unique' do
+  it 'returns an error if email is not unique' do
     user =
     {
       "email": "whatever@example.com",
       "password": "password123",
       "password_confirmation": "password123"
     }
-    # headers = { "CONTENT_TYPE" => "application/json" }
 
     post "/api/v1/users", params: user, as: :json
 
+    another_user =
+    {
+      "email": "whatever@example.com",
+      "password": "password123",
+      "password_confirmation": "password123"
+    }
+
+    post "/api/v1/users", params: another_user, as: :json
+
     parsed_response = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to_not be_successful
+
+    expect(response.status).to eq(400)
+    expect(parsed_response[:errors][0]).to eq("Email has already been taken")
   end
 end
