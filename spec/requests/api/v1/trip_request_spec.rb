@@ -77,7 +77,7 @@ RSpec.describe 'User Roadtrip' do
     trip_json_response = File.read('spec/fixtures/trip_route_data.json')
     stub_request(:get, "http://www.mapquestapi.com/directions/v2/route?from=Denver,%20CO&key=UHerve0fkvZVNWgBwQzNhk9nhiz3gtWX&to=Milwaukee,%20WI").
     to_return(status: 200, body: trip_json_response, headers: {})
-    
+
     user =
     {
       "email": "kerri@example.com",
@@ -172,5 +172,85 @@ RSpec.describe 'User Roadtrip' do
     expect(parsed_trip_data[:data][:attributes]).to have_key(:weather_at_eta)
     expect(parsed_trip_data[:data][:attributes][:weather_at_eta]).to be_a(Hash)
     expect(parsed_trip_data[:data][:attributes][:weather_at_eta]).to eq({})
+  end
+
+  xit 'returns an error if no destination city entered' do
+    trip_json_response = File.read('spec/fixtures/trip_route_data.json')
+    stub_request(:get, "http://www.mapquestapi.com/directions/v2/route?from=Denver,%20CO&key=UHerve0fkvZVNWgBwQzNhk9nhiz3gtWX&to=Milwaukee,%20WI").
+    to_return(status: 200, body: trip_json_response, headers: {})
+
+    user =
+    {
+      "email": "kerri@example.com",
+      "password": "password123",
+      "password_confirmation": "password123"
+    }
+    post "/api/v1/users", params: user, as: :json
+
+    login_params =
+        {
+          "email": "kerri@example.com",
+          "password": "password123"
+        }
+
+    post "/api/v1/sessions", params: login_params, as: :json
+
+    user = User.find_by(email: login_params[:email])
+
+    trip_params =
+        {
+          "origin": "Denver, CO",
+          "destination": "",
+          "api_key": "#{user.api_key}"
+        }
+
+    post "/api/v1/road_trip", params: trip_params, as: :json
+
+    parsed_response = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to_not be_successful
+
+    expect(response.status).to eq(400)
+    expect(parsed_response[:errors]).to eq("Destination cannot be blank")
+  end
+
+  xit 'returns an error if no origin city entered' do
+    trip_json_response = File.read('spec/fixtures/trip_route_data.json')
+    stub_request(:get, "http://www.mapquestapi.com/directions/v2/route?from=Denver,%20CO&key=UHerve0fkvZVNWgBwQzNhk9nhiz3gtWX&to=Milwaukee,%20WI").
+    to_return(status: 200, body: trip_json_response, headers: {})
+
+    user =
+    {
+      "email": "kerri@example.com",
+      "password": "password123",
+      "password_confirmation": "password123"
+    }
+    post "/api/v1/users", params: user, as: :json
+
+    login_params =
+        {
+          "email": "kerri@example.com",
+          "password": "password123"
+        }
+
+    post "/api/v1/sessions", params: login_params, as: :json
+
+    user = User.find_by(email: login_params[:email])
+
+    trip_params =
+        {
+          "origin": "",
+          "destination": "Milwaukee, WI",
+          "api_key": "#{user.api_key}"
+        }
+
+    post "/api/v1/road_trip", params: trip_params, as: :json
+
+    parsed_response = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to_not be_successful
+
+    expect(response.status).to eq(400)
+    expect(parsed_response[:errors]).to eq("Origin cannot be blank")
   end
 end
