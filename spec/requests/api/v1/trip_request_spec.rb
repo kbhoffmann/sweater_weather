@@ -77,15 +77,7 @@ RSpec.describe 'User Roadtrip' do
     trip_json_response = File.read('spec/fixtures/trip_route_data.json')
     stub_request(:get, "http://www.mapquestapi.com/directions/v2/route?from=Denver,%20CO&key=UHerve0fkvZVNWgBwQzNhk9nhiz3gtWX&to=Milwaukee,%20WI").
     to_return(status: 200, body: trip_json_response, headers: {})
-
-    coords_json_response = File.read('spec/fixtures/coords_destination_data.json')
-    stub_request(:get, "http://www.mapquestapi.com/geocoding/v1/address?key=UHerve0fkvZVNWgBwQzNhk9nhiz3gtWX&location=Milwaukee,%20WI").
-    to_return(status: 200, body: coords_json_response, headers: {})
-
-    eta_weather_json_response = File.read('spec/fixtures/eta_weather_data.json')
-    stub_request(:get, "https://api.openweathermap.org/data/2.5/onecall?appid=b223e219a2cff0890dbe4fae9e6d5836&exclude=minutely,alerts&lat=43.041072&lon=-87.909421&units=imperial").
-    to_return(status: 200, body: eta_weather_json_response, headers: {})
-
+    
     user =
     {
       "email": "kerri@example.com",
