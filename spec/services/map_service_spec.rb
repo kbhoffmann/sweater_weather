@@ -39,4 +39,22 @@ RSpec.describe MapService do
     expect(MapService.get_trip_route(origin, destination)[:route]).to have_key(:realTime)
     expect(MapService.get_trip_route(origin, destination)[:route][:realTime]).to be_an(Integer)
   end
+
+  it 'profides data if a trip route is impossible' do
+    swiss_trip_json_response = File.read('spec/fixtures/swiss_trip_data.json')
+    stub_request(:get, "http://www.mapquestapi.com/directions/v2/route?from=Denver,%20CO&key=UHerve0fkvZVNWgBwQzNhk9nhiz3gtWX&to=Zurich,%20Switzerland").
+    to_return(status: 200, body: swiss_trip_json_response, headers: {})
+
+    origin = "Denver, CO"
+    destination = "Zurich, Switzerland"
+
+    expect(MapService.get_trip_route(origin, destination)).to be_a(Hash)
+    expect(MapService.get_trip_route(origin, destination)).to have_key(:route)
+    expect(MapService.get_trip_route(origin, destination)[:route]).to be_a(Hash)
+    expect(MapService.get_trip_route(origin, destination)[:route]).to have_key(:routeError)
+    expect(MapService.get_trip_route(origin, destination)).to have_key(:info)
+    expect(MapService.get_trip_route(origin, destination)[:info]).to be_a(Hash)
+    expect(MapService.get_trip_route(origin, destination)[:info][:messages]).to be_an(Array)
+    expect(MapService.get_trip_route(origin, destination)[:info][:messages][0]).to eq("We are unable to route with the given locations.")
+  end
 end

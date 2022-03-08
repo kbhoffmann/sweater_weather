@@ -82,4 +82,40 @@ RSpec.describe "Requests for User" do
     expect(response.status).to eq(400)
     expect(parsed_response[:errors][0]).to eq("Email has already been taken")
   end
+
+  it 'returns an error if email is blank' do
+    user =
+    {
+      "email": "",
+      "password": "password123",
+      "password_confirmation": "password456"
+    }
+
+    post "/api/v1/users", params: user, as: :json
+
+    parsed_response = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to_not be_successful
+
+    expect(response.status).to eq(400)
+    expect(parsed_response[:errors][0]).to eq("Email can't be blank")
+  end
+
+  it 'returns an error if password is blank' do
+    user =
+    {
+      "email": "cat@gmail.com",
+      "password": "",
+      "password_confirmation": ""
+    }
+
+    post "/api/v1/users", params: user, as: :json
+
+    parsed_response = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to_not be_successful
+
+    expect(response.status).to eq(400)
+    expect(parsed_response[:errors][0]).to eq("Password can't be blank")
+  end
 end
