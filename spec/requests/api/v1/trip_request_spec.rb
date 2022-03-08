@@ -10,6 +10,11 @@ RSpec.describe 'User Roadtrip' do
     stub_request(:get, "http://www.mapquestapi.com/geocoding/v1/address?key=UHerve0fkvZVNWgBwQzNhk9nhiz3gtWX&location=Milwaukee,%20WI").
     to_return(status: 200, body: coords_json_response, headers: {})
 
+    eta_weather_json_response = File.read('spec/fixtures/eta_weather_data.json')
+    stub_request(:get, "https://api.openweathermap.org/data/2.5/onecall?appid=b223e219a2cff0890dbe4fae9e6d5836&exclude=minutely,alerts&lat=43.041072&lon=-87.909421&units=imperial").
+    to_return(status: 200, body: eta_weather_json_response, headers: {})
+
+
 
     user =
     {
@@ -56,10 +61,10 @@ RSpec.describe 'User Roadtrip' do
     expect(parsed_trip_data[:data][:attributes].length).to eq(4)
     expect(parsed_trip_data[:data][:attributes]).to have_key(:start_city)
     expect(parsed_trip_data[:data][:attributes][:start_city]).to be_a(String)
-    expect(parsed_trip_data[:data][:attributes][:start_city]).to eq("Denver,CO")
+    expect(parsed_trip_data[:data][:attributes][:start_city]).to eq("Denver, CO")
     expect(parsed_trip_data[:data][:attributes]).to have_key(:end_city)
     expect(parsed_trip_data[:data][:attributes][:end_city]).to be_a(String)
-    expect(parsed_trip_data[:data][:attributes][:end_city]).to eq("Milwaukee,WI")
+    expect(parsed_trip_data[:data][:attributes][:end_city]).to eq("Milwaukee, WI")
     expect(parsed_trip_data[:data][:attributes]).to have_key(:travel_time)
     expect(parsed_trip_data[:data][:attributes][:travel_time]).to be_a(String)
     expect(parsed_trip_data[:data][:attributes]).to have_key(:weather_at_eta)

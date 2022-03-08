@@ -2,7 +2,7 @@ class TripSerializer
   def self.road_trip_json(trip_data, eta_weather)
     {
       "data": {
-        "id": null,
+        "id": nil,
         "type": "roadtrip",
         "attributes": {
           "start_city": trip_data.start_city,

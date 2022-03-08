@@ -18,7 +18,7 @@ class WeatherFacade
     end
   end
 
-  def self.eta_weather(latitude, longitude, travel_time)
+  def self.eta_weather(travel_time, latitude, longitude)
     eta_hour_data = WeatherService.get_weather_data(latitude, longitude)[:hourly].first(travel_time).last
     DestinationWeather.new(eta_hour_data)
   end
