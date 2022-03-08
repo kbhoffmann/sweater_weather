@@ -9,7 +9,7 @@ class Trip
   end
 
   def route_available(trip_data)
-    if trip_data.has_key?(:routeError)
+    if trip_data[:routeError][:errorCode] == 2
       @travel_time = "Impossible"
       @travel_hours = "Impossible"
     else
