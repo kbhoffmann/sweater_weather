@@ -2,6 +2,15 @@ require 'rails_helper'
 
 RSpec.describe 'User Roadtrip' do
   it 'can return a json response of trip information for a start and end city request' do
+    trip_json_response = File.read('spec/fixtures/trip_route_data.json')
+    stub_request(:get, "http://www.mapquestapi.com/directions/v2/route?from=Denver,%20CO&key=UHerve0fkvZVNWgBwQzNhk9nhiz3gtWX&to=Milwaukee,%20WI").
+    to_return(status: 200, body: trip_json_response, headers: {})
+
+    coords_json_response = File.read('spec/fixtures/coords_destination_data.json')
+    stub_request(:get, "http://www.mapquestapi.com/geocoding/v1/address?key=UHerve0fkvZVNWgBwQzNhk9nhiz3gtWX&location=Milwaukee,%20WI").
+    to_return(status: 200, body: coords_json_response, headers: {})
+
+
     user =
     {
       "email": "kerri@example.com",
