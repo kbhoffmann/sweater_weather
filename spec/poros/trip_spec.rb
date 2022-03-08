@@ -29,6 +29,6 @@ RSpec.describe Trip do
     expect(trip.start_city).to eq("Denver, CO")
     expect(trip.end_city).to eq("Zurich, Switzerland")
     expect(trip.travel_time).to eq("Impossible")
-    expect(trip.travel_hours).to eq(nil)
+    expect(trip.travel_hours).to eq("Impossible")
   end
 end
