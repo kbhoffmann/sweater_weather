@@ -121,7 +121,11 @@ RSpec.describe 'User Roadtrip' do
     expect(parsed_response[:errors]).to eq("You Must Provide a valid API key")
   end
 
-  xit 'does not return a weather block for impossible route and returns impossible for travel time' do
+  it 'returns an empty weather block for impossible route and returns impossible for travel time' do
+    swiss_trip_json_response = File.read('spec/fixtures/swiss_trip_data.json')
+    stub_request(:get, "http://www.mapquestapi.com/directions/v2/route?from=Denver,%20CO&key=UHerve0fkvZVNWgBwQzNhk9nhiz3gtWX&to=Zurich,%20Switzerland").
+    to_return(status: 200, body: swiss_trip_json_response, headers: {})
+
     user =
     {
       "email": "kerri@example.com",
@@ -152,5 +156,35 @@ RSpec.describe 'User Roadtrip' do
     parsed_trip_data = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_successful
+
+    expect(parsed_trip_data).to be_a(Hash)
+    expect(parsed_trip_data.length).to eq(1)
+    expect(parsed_trip_data).to have_key(:data)
+    expect(parsed_trip_data[:data]).to be_a(Hash)
+    expect(parsed_trip_data[:data].length).to eq(3)
+    expect(parsed_trip_data[:data]).to have_key(:id)
+    expect(parsed_trip_data[:data][:id]).to eq(nil)
+    expect(parsed_trip_data[:data]).to have_key(:type)
+    expect(parsed_trip_data[:data][:type]).to eq("roadtrip")
+    expect(parsed_trip_data[:data]).to have_key(:attributes)
+    expect(parsed_trip_data[:data][:attributes]).to be_a(Hash)
+    expect(parsed_trip_data[:data][:attributes].length).to eq(4)
+    expect(parsed_trip_data[:data][:attributes]).to have_key(:start_city)
+    expect(parsed_trip_data[:data][:attributes][:start_city]).to be_a(String)
+    expect(parsed_trip_data[:data][:attributes][:start_city]).to eq("Denver, CO")
+    expect(parsed_trip_data[:data][:attributes]).to have_key(:end_city)
+    expect(parsed_trip_data[:data][:attributes][:end_city]).to be_a(String)
+    expect(parsed_trip_data[:data][:attributes][:end_city]).to eq("Zurich, Switzerland")
+    expect(parsed_trip_data[:data][:attributes]).to have_key(:travel_time)
+    expect(parsed_trip_data[:data][:attributes][:travel_time]).to eq("Impossible")
+    expect(parsed_trip_data[:data][:attributes]).to have_key(:weather_at_eta)
+    expect(parsed_trip_data[:data][:attributes][:weather_at_eta]).to be_a(String)
+    expect(parsed_trip_data[:data][:attributes][:weather_at_eta]).to eq("")
+
+    # expect(parsed_trip_data[:data][:attributes][:weather_at_eta]).to be_a(Hash)
+    # expect(parsed_trip_data[:data][:attributes][:weather_at_eta]).to have_key(:temperature)
+    # expect(parsed_trip_data[:data][:attributes][:weather_at_eta][:temperature]).to be_a(Float)
+    # expect(parsed_trip_data[:data][:attributes][:weather_at_eta]).to have_key(:conditions)
+    # expect(parsed_trip_data[:data][:attributes][:weather_at_eta][:conditions]).to be_a(String)
   end
 end
