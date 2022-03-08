@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
       post '/sessions', to: 'sessions#create'
 
-      post '/road_trip', to: 'trips#show'
+      post '/road_trip', to: 'trips#create'
     end
   end
 end
