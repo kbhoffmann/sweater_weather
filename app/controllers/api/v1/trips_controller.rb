@@ -6,7 +6,7 @@ class Api::V1::TripsController < ApplicationController
       eta_weather = WeatherFacade.eta_weather(trip_data.travel_hours, coords.latitude, coords.longitude)
       render json: TripSerializer.road_trip_json(trip_data, eta_weather)
     else
-      render :json => { errors: "You Must Provide an API key" }, status: 401
+      render :json => { errors: "You Must Provide a valid API key" }, status: 401
     end
   end
 end

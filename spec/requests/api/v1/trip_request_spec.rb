@@ -118,7 +118,7 @@ RSpec.describe 'User Roadtrip' do
     expect(response).to_not be_successful
 
     expect(response.status).to eq(401)
-    expect(parsed_response[:errors]).to eq("You Must Provide an API key")
+    expect(parsed_response[:errors]).to eq("You Must Provide a valid API key")
   end
 
   xit 'does not return a weather block for impossible route and returns impossible for travel time' do
