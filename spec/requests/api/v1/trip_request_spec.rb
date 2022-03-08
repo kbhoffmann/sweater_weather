@@ -174,11 +174,7 @@ RSpec.describe 'User Roadtrip' do
     expect(parsed_trip_data[:data][:attributes][:weather_at_eta]).to eq({})
   end
 
-  xit 'returns an error if no destination city entered' do
-    trip_json_response = File.read('spec/fixtures/trip_route_data.json')
-    stub_request(:get, "http://www.mapquestapi.com/directions/v2/route?from=Denver,%20CO&key=UHerve0fkvZVNWgBwQzNhk9nhiz3gtWX&to=Milwaukee,%20WI").
-    to_return(status: 200, body: trip_json_response, headers: {})
-
+  it 'returns an error if no destination city entered' do
     user =
     {
       "email": "kerri@example.com",
@@ -211,14 +207,10 @@ RSpec.describe 'User Roadtrip' do
     expect(response).to_not be_successful
 
     expect(response.status).to eq(400)
-    expect(parsed_response[:errors]).to eq("Destination cannot be blank")
+    expect(parsed_response[:errors]).to eq("Both Origin and Destination must be provided")
   end
 
-  xit 'returns an error if no origin city entered' do
-    trip_json_response = File.read('spec/fixtures/trip_route_data.json')
-    stub_request(:get, "http://www.mapquestapi.com/directions/v2/route?from=Denver,%20CO&key=UHerve0fkvZVNWgBwQzNhk9nhiz3gtWX&to=Milwaukee,%20WI").
-    to_return(status: 200, body: trip_json_response, headers: {})
-
+  it 'returns an error if no origin city entered' do
     user =
     {
       "email": "kerri@example.com",
@@ -251,6 +243,6 @@ RSpec.describe 'User Roadtrip' do
     expect(response).to_not be_successful
 
     expect(response.status).to eq(400)
-    expect(parsed_response[:errors]).to eq("Origin cannot be blank")
+    expect(parsed_response[:errors]).to eq("Both Origin and Destination must be provided")
   end
 end
