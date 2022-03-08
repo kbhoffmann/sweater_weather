@@ -1,0 +1,86 @@
+
+{
+    "info": {
+        "statuscode": 0,
+        "copyright": {
+            "text": "© 2022 MapQuest, Inc.",
+            "imageUrl": "http://api.mqcdn.com/res/mqlogo.gif",
+            "imageAltText": "© 2022 MapQuest, Inc."
+        },
+        "messages": []
+    },
+    "options": {
+        "maxResults": -1,
+        "thumbMaps": true,
+        "ignoreLatLngInput": false
+    },
+    "results": [
+        {
+            "providedLocation": {
+                "location": "Milwaukee, WI"
+            },
+            "locations": [
+                {
+                    "street": "",
+                    "adminArea6": "",
+                    "adminArea6Type": "Neighborhood",
+                    "adminArea5": "Milwaukee",
+                    "adminArea5Type": "City",
+                    "adminArea4": "Milwaukee County",
+                    "adminArea4Type": "County",
+                    "adminArea3": "WI",
+                    "adminArea3Type": "State",
+                    "adminArea1": "US",
+                    "adminArea1Type": "Country",
+                    "postalCode": "",
+                    "geocodeQualityCode": "A5XAX",
+                    "geocodeQuality": "CITY",
+                    "dragPoint": false,
+                    "sideOfStreet": "N",
+                    "linkId": "282039161",
+                    "unknownInput": "",
+                    "type": "s",
+                    "latLng": {
+                        "lat": 43.041072,
+                        "lng": -87.909421
+                    },
+                    "displayLatLng": {
+                        "lat": 43.041072,
+                        "lng": -87.909421
+                    },
+                    "mapUrl": "http://www.mapquestapi.com/staticmap/v5/map?key=UHerve0fkvZVNWgBwQzNhk9nhiz3gtWX&type=map&size=225,160&locations=43.041072,-87.909421|marker-sm-50318A-1&scalebar=true&zoom=12&rand=-1788705254"
+                },
+                {
+                    "street": "",
+                    "adminArea6": "",
+                    "adminArea6Type": "Neighborhood",
+                    "adminArea5": "Milwaukee",
+                    "adminArea5Type": "City",
+                    "adminArea4": "Washington County",
+                    "adminArea4Type": "County",
+                    "adminArea3": "WI",
+                    "adminArea3Type": "State",
+                    "adminArea1": "US",
+                    "adminArea1Type": "Country",
+                    "postalCode": "",
+                    "geocodeQualityCode": "A5XAX",
+                    "geocodeQuality": "CITY",
+                    "dragPoint": false,
+                    "sideOfStreet": "N",
+                    "linkId": "364539196",
+                    "unknownInput": "",
+                    "type": "s",
+                    "latLng": {
+                        "lat": 43.193798,
+                        "lng": -88.064987
+                    },
+                    "displayLatLng": {
+                        "lat": 43.193798,
+                        "lng": -88.064987
+                    },
+                    "mapUrl": "http://www.mapquestapi.com/staticmap/v5/map?key=UHerve0fkvZVNWgBwQzNhk9nhiz3gtWX&type=map&size=225,160&locations=43.193798,-88.064987|marker-sm-50318A-2&scalebar=true&zoom=12&rand=1884451571"
+                }
+            ]
+        }
+    ]
+}

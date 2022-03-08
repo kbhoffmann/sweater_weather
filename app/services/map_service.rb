@@ -11,4 +11,14 @@ class MapService
 
     data = JSON.parse(response.body, symbolize_names: true)
   end
+
+  def self.get_trip_route(origin, destination)
+    response = conn.get("/directions/v2/route?") do |request|
+      request.params['key'] = "#{ENV['mapquest_api_key']}"
+      request.params['from'] = origin
+      request.params['to'] = destination
+    end
+
+    data = JSON.parse(response.body, symbolize_names: true)
+  end
 end

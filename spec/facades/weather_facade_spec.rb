@@ -35,4 +35,16 @@ RSpec.describe WeatherFacade do
     expect(WeatherFacade.next_eight_hours(latitude, longitude).first).to be_an(HourlyWeather)
     expect(WeatherFacade.next_eight_hours(latitude, longitude).length).to eq(8)
   end
+
+  it 'sends information to the Hourly Weather poro for trip eta' do
+    json_response = File.read('spec/fixtures/eta_weather_data.json')
+    stub_request(:get, "https://api.openweathermap.org/data/2.5/onecall?appid=b223e219a2cff0890dbe4fae9e6d5836&exclude=minutely,alerts&lat=-87.909421&lon=15&units=imperial").
+    to_return(status: 200, body: json_response, headers: {})
+
+    latitude = 43.041072
+    longitude = -87.909421
+    travel_time = 15
+
+    expect(WeatherFacade.eta_weather(latitude, longitude, travel_time)).to be_a(DestinationWeather)
+  end
 end
