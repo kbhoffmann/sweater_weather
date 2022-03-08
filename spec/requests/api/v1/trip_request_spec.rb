@@ -178,8 +178,8 @@ RSpec.describe 'User Roadtrip' do
     expect(parsed_trip_data[:data][:attributes]).to have_key(:travel_time)
     expect(parsed_trip_data[:data][:attributes][:travel_time]).to eq("Impossible")
     expect(parsed_trip_data[:data][:attributes]).to have_key(:weather_at_eta)
-    expect(parsed_trip_data[:data][:attributes][:weather_at_eta]).to be_a(String)
-    expect(parsed_trip_data[:data][:attributes][:weather_at_eta]).to eq("")
+    expect(parsed_trip_data[:data][:attributes][:weather_at_eta]).to be_a(Hash)
+    expect(parsed_trip_data[:data][:attributes][:weather_at_eta]).to eq({})
 
     # expect(parsed_trip_data[:data][:attributes][:weather_at_eta]).to be_a(Hash)
     # expect(parsed_trip_data[:data][:attributes][:weather_at_eta]).to have_key(:temperature)
