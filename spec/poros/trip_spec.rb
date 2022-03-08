@@ -15,5 +15,6 @@ RSpec.describe Trip do
       expect(trip.start_city).to eq("Denver, CO")
       expect(trip.end_city).to eq("Milwaukee, WI")
       expect(trip.travel_time).to eq("15 hours, 09 minutes")
+      expect(trip.travel_hours).to eq(15)
   end
 end
