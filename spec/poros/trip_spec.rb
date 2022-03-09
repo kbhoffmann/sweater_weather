@@ -8,6 +8,7 @@ RSpec.describe Trip do
       trip_data = {
          :distance=>1047.017,
          :realTime=>54577,
+         :formattedTime=>"14:59:49",
          :routeError=>{:errorCode=> -400, :message=>""}
                }
       trip = Trip.new(trip_data, origin, destination)
