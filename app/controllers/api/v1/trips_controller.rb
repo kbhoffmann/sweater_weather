@@ -21,7 +21,7 @@ class Api::V1::TripsController < ApplicationController
   private
 
   def check_api_key
-    if params[:api_key].length == 32
+    if params[:api_key].length == 24
       user = User.find_by(api_key: params[:api_key])
     end
   end
