@@ -2,16 +2,17 @@
 ![Sweater Weather PIC](https://res.cloudinary.com/teepublic/image/private/s--4uOp7owU--/t_Resized%20Artwork/c_fit,g_north_west,h_1054,w_1054/co_ffffff,e_outline:53/co_ffffff,e_outline:inner_fill:53/co_bbbbbb,e_outline:3:1000/c_mpad,g_center,h_1260,w_1260/b_rgb:eeeeee/c_limit,f_auto,h_630,q_90,w_630/v1555323054/production/designs/4642747_0.jpg
 )
 
-
 #### Project stats:
    ![languages](https://img.shields.io/github/languages/top/kbhoffmann/sweater_weather?color=red)
    ![closed PRs](https://img.shields.io/github/issues-pr-closed/kbhoffmann/sweater_weather?style=flat-square)   
-
 
 #### Created using:
 ![RoR](https://img.shields.io/badge/Ruby_on_Rails-CC0000?style=for-the-badge&logo=ruby-on-rails&logoColor=white)
 - Ruby 2.7.2 
 - Rails 5.2.6  
+- PostgreSQL
+- RSpec
+- Postman
 
 ## Learning Goals for this Turing School Project:
   - Expose an API that aggregates data from multiple external APIs
@@ -22,6 +23,13 @@
 
 ## Project Description:
   Imagine you are a back-end developer working on a team that is building an application to plan road trips. This app will allow users to see the current weather as well as the forecasted weather at the destination.  Your team is working in a service-oriented architecture. The front-end will communicate with your back-end through an API. Your job is to expose that API that satisfies the front-end team’s requirements.
+  
+  3 different APIs were used for this project:
+1. [Open Weather's One Call](https://openweathermap.org/api/one-call-api)
+2. [Mapquest API](https://developer.mapquest.com/documentation/)
+3. [Unsplash API](https://unsplash.com/documentation#getting-started)
+
+API keys are required to use this project.  Visit the links to get your own!  They will then be used in further instructions below.
 
 ## Cloning and Setup:
    * Clone this repo onto your local machine
@@ -29,11 +37,21 @@
    * Run ```bundle```
    * Run ```rails db:{create, migrate}```
    * To run the test suite run ```bundle exec rspec```
+   * Run `bundle exec figaro install` (this creates an `application.yml` file. Add this file to your .gitignore so your keys are not for others to see!
+   * Add the following lines to your `application.yml` file, adding in your own keys as the values to the variables I included.  Do not change the variables! They are necessary for the code to work.
+   ```
+   weather_api_key: your weather api key
+
+   unsplash_client_id: your unsplash client id
+
+   mapquest_api_key: your mapquest api key
+   ```
+   * Now you are ready to fire it up!
    * To use in Postman, in your console run the server ```rails s```
    * Now you're on your way!
 
 ## How to get an API key and Posting to your Database using Postman:
-   Using the Postman API platform tool you can simulate creating an account on the backend by running ```rails s``` in your terminal.  In Postman send a POST request to localhost:3000 and which ever endpoint you would like to hit.  For posting to /users, /sessions, and /road_trip, make sure you put the body of your parameters such as email, password, password confirmation, api_key, destination, and origin in the body of the Postman request, not the params.  This is done for security reasons to help protect user information. Examples of what to include in the body are demonstrated below in each example.  You must include your API key when planning a road trip!
+   Using the Postman API platform tool you can simulate creating an account on the backend by running ```rails s``` in your terminal.  In Postman send a POST request to localhost:3000 and which ever endpoint you would like to hit. (ie: localhost:3000/?location=milwaukee,wi)  For posting to /users, /sessions, and /road_trip, make sure you put the body of your parameters such as email, password, password confirmation, api_key, destination, and origin in the body of the Postman request, not the params.  This is done for security reasons to help protect user information. Examples of what to include in the body are demonstrated below in each example.  You must include your API key when planning a road trip!
    
 ## API endpoints:
 ### Example GET request for forcast for mandatory location parameter.
