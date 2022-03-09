@@ -13,7 +13,7 @@ class Trip
       @travel_time = "Impossible"
       @travel_hours = "Impossible"
     else
-      @travel_time = Time.at(trip_data[:realTime]).utc.strftime("%H hours, %M minutes")
+      @travel_time = trip_data[:formattedTime]
       @travel_hours = trip_data[:realTime] / 3600
     end
   end
