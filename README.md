@@ -1,4 +1,7 @@
 # README
+![Sweater Weather PIC](https://res.cloudinary.com/teepublic/image/private/s--4uOp7owU--/t_Resized%20Artwork/c_fit,g_north_west,h_1054,w_1054/co_ffffff,e_outline:53/co_ffffff,e_outline:inner_fill:53/co_bbbbbb,e_outline:3:1000/c_mpad,g_center,h_1260,w_1260/b_rgb:eeeeee/c_limit,f_auto,h_630,q_90,w_630/v1555323054/production/designs/4642747_0.jpg
+)
+
 
 #### Project stats:
    ![languages](https://img.shields.io/github/languages/top/kbhoffmann/sweater_weather?color=red)
@@ -18,25 +21,19 @@
   - Research, select, and consume an API based on your needs as a developer
 
 ## Project Description:
-  You are a back-end developer working on a team that is building an application to plan road trips. This app will allow users to see the current weather as well as the forecasted weather at the destination.
-
-  Your team is working in a service-oriented architecture. The front-end will communicate with your back-end through an API. Your job is to expose that API that satisfies the front-end team’s requirements.
+  Imagine you are a back-end developer working on a team that is building an application to plan road trips. This app will allow users to see the current weather as well as the forecasted weather at the destination.  Your team is working in a service-oriented architecture. The front-end will communicate with your back-end through an API. Your job is to expose that API that satisfies the front-end team’s requirements.
 
 ## Cloning and Setup:
-      * System dependencies
-      * Configuration
-      * Database creation
-      * Database initialization
-      * How to run the test suite
-      * Services (job queues, cache servers, search engines, etc.)
-      * Deployment instructions
+   * Clone this repo onto your local machine
+   * cd into the sweater_weather directory
+   * Run ```bundle```
+   * Run ```rails db:{create, migrate}```
+   * To run the test suite run ```bundle exec rspec```
+   * To use in Postman, in your console run the server ```rails s```
+   * Now you're on your way!
 
-## How to get an API key:
-
-
-
-   
-   
+## How to get an API key and Posting to your Database using Postman:
+   Using the Postman API platform tool you can simulate creating an account on the backend by running ```rails s``` in your terminal.  In Postman send a POST request to localhost:3000 and which ever endpoint you would like to hit.  For posting to /users, /sessions, and /road_trip, make sure you put the body of your parameters such as email, password, password confirmation, api_key, destination, and origin in the body of the Postman request, not the params.  This is done for security reasons to help protect user information. Examples of what to include in the body are demonstrated below in each example.  You must include your API key when planning a road trip!
    
 ## API endpoints:
 ### Example GET request for forcast for mandatory location parameter.
@@ -45,7 +42,7 @@
       Content-Type: application/json
       Accept: application/json
 ```
-### Corresponding JSON response for example GET request for forcast for location parameter.
+### Corresponding JSON response for example GET request for forcast for location parameter.  This gives the current weather, the next 5 days of weather, and the next 8 hours of weather.
 ```
       {
           "data": {
