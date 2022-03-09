@@ -33,7 +33,7 @@ RSpec.describe "User Session/Login Request" do
     expect(parsed_session_response[:data]).to have_key(:attributes)
     expect(parsed_session_response[:data][:attributes]).to have_key(:email)
     expect(parsed_session_response[:data][:attributes]).to have_key(:api_key)
-    expect(parsed_session_response[:data][:attributes][:api_key].length).to eq(32)
+    expect(parsed_session_response[:data][:attributes][:api_key].length).to eq(24)
     expect(parsed_session_response[:data]).to_not have_key(:password)
     expect(parsed_session_response[:data]).to_not have_key(:password_confirmation)
   end
