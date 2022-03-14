@@ -1,6 +1,7 @@
 class ForecastSerializer
 
-  def self.weather_json(current, five_day, eight_hour)
+  def self.weather_json(weather_data)
+    current = weather_data[:current_weather]
       {
       "data": {
         "id": nil,
@@ -20,7 +21,7 @@ class ForecastSerializer
           },
 
         "daily_weather":
-          five_day.map do |day|
+          weather_data[:daily_weather].map do |day|
             {
               "date": day.date,
               "sunrise": day.sunrise,
@@ -33,7 +34,7 @@ class ForecastSerializer
           end,
 
           "hourly_weather":
-            eight_hour.map do |hour|
+            weather_data[:hourly_weather].map do |hour|
              {
               "time": hour.time,
               "temperature": hour.temperature,
