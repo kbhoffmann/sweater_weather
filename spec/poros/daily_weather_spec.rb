@@ -12,10 +12,10 @@ RSpec.describe 'Daily Weather' do
 
     forecast = DailyWeather.new(weather_data)
     expect(forecast).to be_an_instance_of(DailyWeather)
-    # expect(forecast.date).to eq("2022-03-05")
     expect(forecast.date).to eq("2022-03-05")
     expect(forecast.date).to eq(Time.at(1646506800).strftime("%Y-%m-%d"))
-
+    expect(forecast.sunrise).to eq(Time.at(1646486829).to_s)
+    expect(forecast.sunset).to eq(Time.at(1646528162).to_s)
     # expect(forecast.sunrise).to eq("2022-03-05 06:27:09 -0700")
     # expect(forecast.sunset).to eq("2022-03-05 17:56:02 -0700")
     expect(forecast.max_temp).to eq(46.99)
