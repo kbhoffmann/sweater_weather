@@ -22,7 +22,7 @@
   - Research, select, and consume an API based on your needs as a developer
 
 ## Project Description:
-  Imagine you are a back-end developer working on a team that is building an application to plan road trips. This app will allow users to see the current weather as well as the forecasted weather at the destination.  Your team is working in a service-oriented architecture. The front-end will communicate with your back-end through an API. Your job is to expose that API that satisfies the front-end team’s requirements.
+  Imagine you are a back-end developer working on a team that is building an application to plan road trips. This app will allow users to see the current weather as well as the forecasted weather at the destination.  Your team is working in a service-oriented architecture. The frontend will communicate with your backend through an API. Your job is to expose that API that satisfies the front-end team’s requirements.
   
   3 different APIs were used for this project:
 1. [Open Weather's One Call](https://openweathermap.org/api/one-call-api)
